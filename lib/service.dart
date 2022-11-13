@@ -51,7 +51,7 @@ class UploadService {
 
     debugPrint('$convertedImage is in base64');
 
-    return img64;
+    return convertedImage;
   }
 
 
