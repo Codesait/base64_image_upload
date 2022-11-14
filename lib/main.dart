@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io' as io;
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:upload_encoded_image/service.dart';
 
 void main() {
@@ -114,7 +116,12 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         isLoading = true;
       });
-      await _service.uploadPhoto(imageFile).whenComplete(() {
+      await _service.httpUpload(imageFile).then((value) {
+        if (value != null) {
+          var data = value as Response;
+          print(data.statusCode.toString());
+        }
+      }).whenComplete(() {
         setState(() {
           isLoading = false;
         });
